@@ -78,19 +78,21 @@ class Player:
     def user_move(self):
         while True:
             input_coord = input("Enter the coordinates: ").split()
-            int_coord = [int(coord) for coord in input_coord]
-            user_index = [-1 * (int_coord[1] - 3), int_coord[0] - 1] # Converts user coordinates into a matrix index.
 
             # Coordinate input validation
             if any(coord not in string.digits for coord in input_coord):
-                print("You should enter numbers!")
+                print("You should enter two single numbers!")
                 continue
             if len(input_coord) != 2:
                 print("Only enter two coordinates!")
                 continue
+
+            int_coord = [int(coord) for coord in input_coord]
             if any(coord < 1 or coord > 3 for coord in int_coord):
                 print("Coordinates should be from 1 to 3!")
                 continue
+
+            user_index = [-1 * (int_coord[1] - 3), int_coord[0] - 1] # Converts user coordinates into a matrix index.
             if playing_grid.matrix[user_index[0]][user_index[1]] != "_":
                 print("This cell is occupied! Choose another one!")
                 continue
